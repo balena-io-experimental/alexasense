@@ -1,11 +1,12 @@
-FROM resin/raspberrypi3-python:3.5-20161126
+FROM resin/raspberrypi3-debian:jessie-20161130
 
 WORKDIR /usr/src/app
 ENV INITSYSTEM on
 
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
-      sense-hat=2.2.0-1 \
+      python-pip=1.5.6-5 \
+      sense-hat=1.2 \
       raspberrypi-bootloader=1.20161125-1 \
     && apt-get clean
 
