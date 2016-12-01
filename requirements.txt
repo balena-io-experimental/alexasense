@@ -1,2 +1,1 @@
-
--e git+https://github.com/johnwheeler/flask-ask@bab2cc607c3eef3ff46314a4dd4278b0a082d5bd#egg=flask_ask
+flask-ask==0.8.2
