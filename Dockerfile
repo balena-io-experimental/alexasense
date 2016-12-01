@@ -8,7 +8,7 @@ RUN apt-get update && \
       python-pip=1.5.6-5 \
       sense-hat=1.2 \
       raspberrypi-bootloader=1.20161125-1 \
-    && apt-get clean
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
