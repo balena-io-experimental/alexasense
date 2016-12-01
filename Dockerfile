@@ -7,6 +7,7 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
       python3=3.4.2-2 \
       sense-hat=1.2 \
+      python3-cffi=0.8.6-1 \
       raspberrypi-bootloader=1.20161125-1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -14,13 +15,13 @@ RUN apt-get update && \
 COPY requirements.txt ./
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
-      build-essential libyaml-dev python3-dev python3-pip && \
+      build-essential libyaml-dev python3-dev python3-pip python3-wheel && \
     pip3 install -r requirements.txt && \
     apt-get remove \
-      build-essential libyaml-dev python3-dev python3-pip && \
+      build-essential libyaml-dev python3-dev python3-pip python3-wheel && \
       apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY start.sh ./
 COPY src/* ./
+COPY start.sh ./
 
 CMD ["bash", "start.sh"]
