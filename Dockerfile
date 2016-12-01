@@ -7,7 +7,6 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
       python3=3.4.2-2 \
       sense-hat=1.2 \
-      python3-cffi=0.8.6-1 \
       raspberrypi-bootloader=1.20161125-1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
