@@ -1,4 +1,4 @@
-FROM resin/raspberrypi3-alpine-python:3.5.2-edge-20161201
+FROM resin/raspberrypi3-python:3.5-20161126
 
 WORKDIR /usr/src/app
 ENV INITSYSTEM on
