@@ -6,6 +6,7 @@ ENV INITSYSTEM on
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
       build-essential=11.7 \
+      python-dev=2.7.9-1 \
       python-pip=1.5.6-5 \
       sense-hat=1.2 \
       raspberrypi-bootloader=1.20161125-1 \
