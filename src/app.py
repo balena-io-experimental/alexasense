@@ -35,7 +35,13 @@ def answer_question(target):
 
 @ask.intent('EnvironmentIntent')
 def get_environment():
-    statement("Come back in a bit")
+    temperature = round(sense.get_temperature(), 1)
+    humidity = int(sense.get_humidity())
+    pressure = round(sense.get_pressure(), 1)
+    environment_msg = render_template('environment', temperature=temperature, humidity=humidity, pressure=pressure)
+    card_title = 'RPi with SenseHAT'
+    environment_card = render_template('environment_card', temperature=temperature, humidity=humidity, pressure=pressure)
+    return statement(environment_msg).simple_card(card_title, environment_card)
 
 @ask.intent('TemperatureIntent')
 def get_temperature():
