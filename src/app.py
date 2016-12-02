@@ -18,13 +18,16 @@ def get_CPU_temperature():
     Code from: https://www.raspberrypi.org/forums/viewtopic.php?p=875577&sid=c6042b50b58cff9f606b56115e5be3d8#p875577
     """
     res = os.popen('vcgencmd measure_temp').readline()
-    return(res.replace("temp=","").replace("'C\n",""))
+    return float(res.replace("temp=","").replace("'C\n",""))
 
 def get_adjusted_temperature():
-    cpuTemp = int( float( get_CPU_temperature() ) )
-    ambient = sense.get_temperature_from_pressure()
-    calctemp = ambient - ( (cpuTemp - ambient) / 1.5 )
-    return calctemp
+    """SenseHAT measures too high temperature because it's close to the RPi SoC,
+    use this approximation to get closer to the real value even if the reading is off
+    """
+    cpu_temperature = get_CPU_temperature()
+    ambient_temperature = sense.get_temperature_from_pressure()
+    adjusted_temperature = ambient_temperature - ( (cpu_temperature - ambient_temperature) / 1.5 )
+    return adjusted_temperature
 
 ## Services
 @ask.launch
