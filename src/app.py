@@ -29,7 +29,7 @@ def get_adjusted_temperature():
     adjusted_temperature = ambient_temperature - ( (cpu_temperature - ambient_temperature) / 1.5 )
     return adjusted_temperature
 
-## Services
+# Alexa Services
 @ask.launch
 def get_hello():
     card_title = ('RPi with SenseHAT')
