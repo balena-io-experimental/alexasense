@@ -67,4 +67,4 @@ def get_pressure():
 if __name__ == '__main__':
     # Load DEBUG variable from the environment
     debug = True if os.getenv('DEBUG', '0') == '1' else False
-    app.run(port=80, debug=debug)
+    app.run(host='0.0.0.0', port=80, debug=debug)
