@@ -81,7 +81,7 @@ def get_pressure():
     pressure_msg = render_template('pressure', pressure=pressure)
     card_title = 'RPi with SenseHAT'
     pressure_card = render_template('pressure_card', pressure=pressure)
-    return statement(humidity_msg).simple_card(card_title, pressure_card)
+    return statement(pressure_msg).simple_card(card_title, pressure_card)
 
 if __name__ == '__main__':
     # Set up SenseHAT display rotation
