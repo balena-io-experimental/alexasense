@@ -12,7 +12,6 @@ sense.clear()
 # Setting up Alexa
 app = Flask(__name__)
 ask = Ask(app, "/")
-logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 def get_CPU_temperature():
     """Get CPU temperature
@@ -117,4 +116,6 @@ if __name__ == '__main__':
 
     # Load DEBUG variable from the environment
     debug = True if os.getenv('DEBUG', '0') == '1' else False
+    loglevel = logging.DEBUG if debug else logging.INFO
+    logging.getLogger("flask_ask").setLevel(loglevel)
     app.run(host='0.0.0.0', port=80, debug=debug)
