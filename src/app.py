@@ -7,7 +7,6 @@ import os
 ## Setting up the SenseHAT
 sense = SenseHat()
 sense.clear()
-sense.show_message("Hello Alexa")
 
 ## Setting up Alexa
 app = Flask(__name__)
@@ -44,6 +43,7 @@ def get_temperature():
     temperature_msg = render_template('temperature', temperature=temperature)
     card_title = 'RPi with SenseHAT'
     temperature_card = render_template('temperature_card', temperature=temperature)
+    sense.show(temperature_card)
     return statement(temperature_msg).simple_card(card_title, temperature_card)
 
 @ask.intent('HumidityIntent')
@@ -52,6 +52,7 @@ def get_humidity():
     humidity_msg = render_template('humidity', humidity=humidity)
     card_title = 'RPi with SenseHAT'
     humidity_card = render_template('humidity_card', humidity=humidity)
+    sense.show(humidity_card)
     return statement(humidity_msg).simple_card(card_title, humidity_card)
 
 @ask.intent('PressureIntent')
@@ -60,6 +61,7 @@ def get_pressure():
     pressure_msg = render_template('pressure', pressure=pressure)
     card_title = 'RPi with SenseHAT'
     pressure_card = render_template('pressure_card', pressure=pressure)
+    sense.show(pressure_card)
     return statement(humidity_msg).simple_card(card_title, pressure_card)
 
 if __name__ == '__main__':
