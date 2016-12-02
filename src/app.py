@@ -3,6 +3,7 @@ import logging
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 import os
+import multiprocessing
 
 # Setting up the SenseHAT
 sense = SenseHat()
@@ -28,6 +29,9 @@ def get_adjusted_temperature():
     ambient_temperature = sense.get_temperature_from_pressure()
     adjusted_temperature = ambient_temperature - ( (cpu_temperature - ambient_temperature) / 1.5 )
     return adjusted_temperature
+
+def display_text(text):
+    sense.show_message(text)
 
 # Alexa Services
 @ask.launch
@@ -57,6 +61,11 @@ def get_environment():
     environment_msg = render_template('environment', temperature=temperature, humidity=humidity, pressure=pressure)
     card_title = 'RPi with SenseHAT'
     environment_card = render_template('environment_card', temperature=temperature, humidity=humidity, pressure=pressure)
+
+    d = multiprocessing.Process(target=display_text, kwargs={'text': environment_card})
+    d.daemon = True
+    d.start()
+
     return statement(environment_msg).simple_card(card_title, environment_card)
 
 @ask.intent('TemperatureIntent')
@@ -65,6 +74,11 @@ def get_temperature():
     temperature_msg = render_template('temperature', temperature=temperature)
     card_title = 'RPi with SenseHAT'
     temperature_card = render_template('temperature_card', temperature=temperature)
+
+    d = multiprocessing.Process(target=display_text, kwargs={'text': temperature_card})
+    d.daemon = True
+    d.start()
+
     return statement(temperature_msg).simple_card(card_title, temperature_card)
 
 @ask.intent('HumidityIntent')
@@ -73,6 +87,11 @@ def get_humidity():
     humidity_msg = render_template('humidity', humidity=humidity)
     card_title = 'RPi with SenseHAT'
     humidity_card = render_template('humidity_card', humidity=humidity)
+
+    d = multiprocessing.Process(target=display_text, kwargs={'text': humidity_card})
+    d.daemon = True
+    d.start()
+
     return statement(humidity_msg).simple_card(card_title, humidity_card)
 
 @ask.intent('PressureIntent')
@@ -81,6 +100,11 @@ def get_pressure():
     pressure_msg = render_template('pressure', pressure=pressure)
     card_title = 'RPi with SenseHAT'
     pressure_card = render_template('pressure_card', pressure=pressure)
+
+    d = multiprocessing.Process(target=display_text, kwargs={'text': pressure_card})
+    d.daemon = True
+    d.start()
+
     return statement(pressure_msg).simple_card(card_title, pressure_card)
 
 if __name__ == '__main__':
