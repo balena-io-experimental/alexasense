@@ -67,7 +67,7 @@ if __name__ == '__main__':
     display_rotate = os.getenv('ROTATE', '0')
     if display_rotate not in allowed_angles:
         display_rotate = '0'
-    sense.set_rotation(display_rotate)
+    sense.set_rotation(int(display_rotate))
 
     # Load DEBUG variable from the environment
     debug = True if os.getenv('DEBUG', '0') == '1' else False
