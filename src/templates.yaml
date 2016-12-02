@@ -3,6 +3,6 @@ prompt: Would you like to ask it about the temperature, humidity, or pressure?
 temperature: I sense {{ temperature }} degrees Celsius.
 temperature_card: Temperature {{ temperature }} ℃
 humidity: I sense {{ humidity }} % relative humidity.
-humidity_card: Humidity: {{ humidity }} %RH
+humidity_card: Humidity {{ humidity }} %RH
 pressure: I sense {{ pressure }} hectopascal.
-pressure_card: Pressure: {{ pressure }} hPa
+pressure_card: Pressure {{ pressure }} hPa
