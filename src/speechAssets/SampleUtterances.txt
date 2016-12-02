@@ -1,5 +1,3 @@
-QuestionIntent {topic}
-
 TemperatureIntent about the temperature
 TemperatureIntent what's the temperature
 TemperatureIntent what is the temperature

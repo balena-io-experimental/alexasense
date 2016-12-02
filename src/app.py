@@ -40,20 +40,39 @@ def display_text(text):
 def get_hello():
     card_title = ('RPi with SenseHAT')
     hello_msg = render_template('hello')
-    prompt = render_template('prompt')
-    return question(hello_msg).reprompt(prompt).simple_card(card_title, hello_msg)
+    # prompt = render_template('prompt')
+    # return question(hello_msg).reprompt(prompt).simple_card(card_title, hello_msg)
+    return statement(hello_msg).simple_card(card_title, hello_msg)
 
-@ask.intent('QuestionIntent')
-def answer_question(target):
-    if target == 'temperature':
-        get_temperature()
-    elif target == 'humidity':
-        get_humidity()
-    elif target == 'pressure':
-        get_pressure()
-    else:
-        prompt = render_template('prompt')
-        return statement(prompt)
+# ## QuestionIntent, notes here, does not work yet
+# # Intent
+# {
+# /*"intent": "QuestionIntent",
+# "slots": [{
+#           "name": "topic",
+#           "type": "SENSOR"
+#           }]
+# }
+#
+# # Custom slots
+# temperature
+# pressure
+# humidity
+#
+# # Sample utternance:
+# QuestionIntent {topic}
+#
+# @ask.intent('QuestionIntent')
+# def answer_question(target):
+#     if target == 'temperature':
+#         get_temperature()
+#     elif target == 'humidity':
+#         get_humidity()
+#     elif target == 'pressure':
+#         get_pressure()
+#     else:
+#         prompt = render_template('prompt')
+#         return statement(prompt)
 
 @ask.intent('EnvironmentIntent')
 def get_environment():
