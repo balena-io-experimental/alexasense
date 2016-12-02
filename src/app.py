@@ -21,10 +21,9 @@ def get_CPU_temperature():
     return(res.replace("temp=","").replace("'C\n",""))
 
 def get_adjusted_temperature():
-    .simple_card(card_title, temperature_card)
-    cpuTemp=int(float(get_CPU_temperature()))
+    cpuTemp = int( float( get_CPU_temperature() ) )
     ambient = sense.get_temperature_from_pressure()
-    calctemp = ambient - ((cpuTemp - ambient)/ 1.5)
+    calctemp = ambient - ( (cpuTemp - ambient) / 1.5 )
     return calctemp
 
 ## Services
