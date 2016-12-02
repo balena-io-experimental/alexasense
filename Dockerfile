@@ -7,11 +7,23 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
       python3=3.4.2-2 \
       sense-hat=1.2 \
-      raspberrypi-bootloader=1.20160523-1 \
-      raspberrypi-bootloader-nokernel=1.20160523-1~nokernel2 \
-      libraspberrypi0=1.20160523-1~nokernel2 \
-      libraspberrypi-bin=1.20160523-1~nokernel2 \
+      raspberrypi-bootloader=1.20161125-1 \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# To install vcgencmd
+ENV USERLANDVER bb15afe33b313fe045d52277a78653d288e04f67
+RUN apt-get update && \
+    apt-get install -yq --no-install-recommends \
+      build-essential cmake git \
+    && git clone https://github.com/raspberrypi/userland.git && \
+    cd userland && \
+    git checkout -b build ${USERLANDVER} && \
+    bash ./buildme && \
+    cd .. && \
+    rm -rf userland && \
+    apt-get remove \
+      build-essential cmake git \
+    && apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Build extra library requirements
 COPY requirements.txt ./
