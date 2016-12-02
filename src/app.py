@@ -4,11 +4,11 @@ from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
 import os
 
-## Setting up the SenseHAT
+# Setting up the SenseHAT
 sense = SenseHat()
 sense.clear()
 
-## Setting up Alexa
+# Setting up Alexa
 app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
@@ -65,6 +65,13 @@ def get_pressure():
     return statement(humidity_msg).simple_card(card_title, pressure_card)
 
 if __name__ == '__main__':
+    # Set up SenseHAT display rotation
+    allowed_angles = ['0', '90', '180', '270']
+    display_rotate = os.getenv('ROTATE', '0')
+    if display_rotate not in allowed_angles:
+        display_rotate = '0'
+    sense.set_rotation(display_rotate)
+
     # Load DEBUG variable from the environment
     debug = True if os.getenv('DEBUG', '0') == '1' else False
     app.run(host='0.0.0.0', port=80, debug=debug)
