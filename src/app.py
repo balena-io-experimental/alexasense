@@ -13,6 +13,9 @@ sense.clear()
 app = Flask(__name__)
 ask = Ask(app, "/")
 
+# Wether or not show results on the display
+SHOW_DISPLAY = True if os.getenv('DISPLAY', '1') == '1' else False
+
 def get_CPU_temperature():
     """Get CPU temperature
     Code from: https://www.raspberrypi.org/forums/viewtopic.php?p=875577&sid=c6042b50b58cff9f606b56115e5be3d8#p875577
@@ -61,9 +64,11 @@ def get_environment():
     card_title = 'RPi with SenseHAT'
     environment_card = render_template('environment_card', temperature=temperature, humidity=humidity, pressure=pressure)
 
-    d = multiprocessing.Process(target=display_text, kwargs={'text': environment_card})
-    d.daemon = True
-    d.start()
+    if SHOW_DISPLAY:
+        environment_display = render_template('environment_display', temperature=temperature, humidity=humidity, pressure=pressure)
+        d = multiprocessing.Process(target=display_text, kwargs={'text': environment_display})
+        d.daemon = True
+        d.start()
 
     return statement(environment_msg).simple_card(card_title, environment_card)
 
@@ -74,9 +79,11 @@ def get_temperature():
     card_title = 'RPi with SenseHAT'
     temperature_card = render_template('temperature_card', temperature=temperature)
 
-    d = multiprocessing.Process(target=display_text, kwargs={'text': temperature_card})
-    d.daemon = True
-    d.start()
+    if SHOW_DISPLAY:
+        temperature_display = render_template('temperature_display', temperature=temperature)
+        d = multiprocessing.Process(target=display_text, kwargs={'text': temperature_display})
+        d.daemon = True
+        d.start()
 
     return statement(temperature_msg).simple_card(card_title, temperature_card)
 
@@ -87,9 +94,11 @@ def get_humidity():
     card_title = 'RPi with SenseHAT'
     humidity_card = render_template('humidity_card', humidity=humidity)
 
-    d = multiprocessing.Process(target=display_text, kwargs={'text': humidity_card})
-    d.daemon = True
-    d.start()
+    if SHOW_DISPLAY:
+        humidity_display = render_template('humidity_display', humidity=humidity)
+        d = multiprocessing.Process(target=display_text, kwargs={'text': humidity_display})
+        d.daemon = True
+        d.start()
 
     return statement(humidity_msg).simple_card(card_title, humidity_card)
 
@@ -100,9 +109,11 @@ def get_pressure():
     card_title = 'RPi with SenseHAT'
     pressure_card = render_template('pressure_card', pressure=pressure)
 
-    d = multiprocessing.Process(target=display_text, kwargs={'text': pressure_card})
-    d.daemon = True
-    d.start()
+    if SHOW_DISPLAY:
+        pressure_display = render_template('pressure_display', pressure=pressure)
+        d = multiprocessing.Process(target=display_text, kwargs={'text': pressure_display})
+        d.daemon = True
+        d.start()
 
     return statement(pressure_msg).simple_card(card_title, pressure_card)
 

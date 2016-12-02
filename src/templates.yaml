@@ -2,9 +2,13 @@ welcome: Hello, your Raspberry Pi with Sense Hat is connected. Do you want to as
 prompt: Would you like to ask it about the temperature, humidity, or pressure?
 environment: I sense {{ temperature }} degrees Celsius, {{ humidity }} % relative humidity, and {{ pressure }} hectopascal barometric pressure.
 environment_card: Temperature {{ temperature }} °C, Humidity {{ humidity }} %RH, Pressure {{ pressure }} hPa
+environment_display: "T: {{ temperature }}C, H: {{ humidity }}%RH, P: {{ pressure }}hPa"
 temperature: I sense {{ temperature }} degrees Celsius.
 temperature_card: Temperature {{ temperature }} °C
+temperature_display: "T: {{ temperature }}C"
 humidity: I sense {{ humidity }} % relative humidity.
 humidity_card: Humidity {{ humidity }} %RH
+humidity_display: "H: {{ humidity }}%RH"
 pressure: I sense {{ pressure }} hectopascal.
 pressure_card: Pressure {{ pressure }} hPa
+pressure_display: "P: {{ pressure }}hPa"
