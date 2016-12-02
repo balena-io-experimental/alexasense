@@ -7,6 +7,7 @@ RUN apt-get update && \
     apt-get install -yq --no-install-recommends \
       python3=3.4.2-2 \
       sense-hat=1.2 \
+      raspberrypi-bootloader=1.20160523-1 \
       raspberrypi-bootloader-nokernel=1.20160523-1~nokernel2 \
       libraspberrypi0=1.20160523-1~nokernel2 \
       libraspberrypi-bin=1.20160523-1~nokernel2 \
