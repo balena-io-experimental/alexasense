@@ -1,4 +1,4 @@
-welcome: Hello, your Raspberry Pi with Sense Hat is connected. Do you want to ask it about the temperature, humidity, or pressure?
+hello: Hello, your Raspberry Pi with Sense Hat is connected. Do you want to ask it about the temperature, humidity, or pressure?
 prompt: Would you like to ask it about the temperature, humidity, or pressure?
 environment: I sense {{ temperature }} degrees Celsius, {{ humidity }} % relative humidity, and {{ pressure }} hectopascal barometric pressure.
 environment_card: Temperature {{ temperature }} °C, Humidity {{ humidity }} %RH, Pressure {{ pressure }} hPa
