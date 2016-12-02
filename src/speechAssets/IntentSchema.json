@@ -1,0 +1,17 @@
+{
+  "intents": [{
+    "intent": "TemperatureIntent"
+  }, {
+    "intent": "HumidityIntent"
+  }, {
+    "intent": "PressureIntent"
+  }, {
+    "intent": "EnvironmentIntent"
+  }, {
+    "intent": "QuestionIntent",
+    "slots": [{
+              "name": "topic",
+              "type": "SENSOR"
+              }]
+    }]
+}

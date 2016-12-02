@@ -1,0 +1,21 @@
+QuestionIntent {topic}
+
+TemperatureIntent about the temperature
+TemperatureIntent what's the temperature
+TemperatureIntent what is the temperature
+TemperatureIntent how hot is it
+
+HumidityIntent about the humidity
+HumidityIntent what's the humidity
+HumidityIntent what is the humidity
+HumidityIntent how humid it is
+
+PressureIntent about the pressure
+PressureIntent about the barometric pressure
+PressureIntent about the atmospheric pressure
+PressureIntent what's the pressure
+PressureIntent what is the pressure
+
+EnvironmentIntent about the environment
+EnvironmentIntent about all readings
+EnvironmentIntent about everything
