@@ -13,6 +13,20 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
+def get_CPU_temperature():
+    """Get CPU temperature
+    Code from: https://www.raspberrypi.org/forums/viewtopic.php?p=875577&sid=c6042b50b58cff9f606b56115e5be3d8#p875577
+    """
+    res = os.popen('vcgencmd measure_temp').readline()
+    return(res.replace("temp=","").replace("'C\n",""))
+
+def get_adjusted_temperature():
+    .simple_card(card_title, temperature_card)
+    cpuTemp=int(float(get_CPU_temperature()))
+    ambient = sense.get_temperature_from_pressure()
+    calctemp = ambient - ((cpuTemp - ambient)/ 1.5)
+    return calctemp
+
 ## Services
 @ask.launch
 def get_hello():
@@ -35,7 +49,7 @@ def answer_question(target):
 
 @ask.intent('EnvironmentIntent')
 def get_environment():
-    temperature = round(sense.get_temperature(), 1)
+    temperature = round(get_adjusted_temperature(), 1)
     humidity = int(sense.get_humidity())
     pressure = round(sense.get_pressure(), 1)
     environment_msg = render_template('environment', temperature=temperature, humidity=humidity, pressure=pressure)
@@ -45,7 +59,7 @@ def get_environment():
 
 @ask.intent('TemperatureIntent')
 def get_temperature():
-    temperature = round(sense.get_temperature(), 1)
+    temperature = round(get_adjusted_temperature(), 1)
     temperature_msg = render_template('temperature', temperature=temperature)
     card_title = 'RPi with SenseHAT'
     temperature_card = render_template('temperature_card', temperature=temperature)
